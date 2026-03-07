@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 130 35% 97%;
+    --bg-muted: 140 26% 94%;
+    --fg: 154 24% 13%;
+    --surface: 0 0% 100%;
+    --surface-soft: 140 20% 98%;
+    --primary: 146 69% 36%;
+    --primary-strong: 146 78% 28%;
+    --border: 144 21% 86%;
+    --ring: 146 69% 36%;
+  }
+
+  html,
+  body {
+    @apply min-h-full;
+  }
+
+  body {
+    @apply text-slate-900 antialiased;
+    font-family: "Nunito", "Segoe UI", "Trebuchet MS", sans-serif;
+    background:
+      radial-gradient(circle at 15% 10%, hsl(var(--bg-muted)) 0%, transparent 38%),
+      radial-gradient(circle at 85% 0%, hsl(147 50% 91%) 0%, transparent 34%),
+      linear-gradient(180deg, hsl(var(--bg)) 0%, hsl(132 30% 95%) 100%);
+    color: hsl(var(--fg));
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto w-full max-w-6xl px-4 pb-12 pt-6 sm:px-6 sm:pt-8;
+  }
+
+  .surface {
+    @apply rounded-2xl border border-slate-200/70 bg-white/90 shadow-sm backdrop-blur;
+  }
+
+  .surface-soft {
+    @apply rounded-2xl border border-slate-200/70 bg-white/75;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl bg-green-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-green-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center rounded-xl bg-red-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-100;
+  }
+
+  .section-title {
+    @apply text-2xl font-semibold text-slate-900 sm:text-3xl;
+  }
+
+  .section-subtitle {
+    @apply mt-2 text-sm text-slate-600 sm:text-base;
+  }
+}
