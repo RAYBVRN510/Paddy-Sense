@@ -18,7 +18,7 @@ export default function LoginPage() {
 
     const success = await login(email, password);
     if (success) {
-      router.push("/camera");
+      router.push("/home");
     } else {
       setError("Invalid email or password");
     }

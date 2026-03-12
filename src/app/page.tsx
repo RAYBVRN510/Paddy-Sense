@@ -28,7 +28,7 @@ export default function LandingPage() {
 
   useEffect(() => {
     if (user) {
-      router.push("/camera");
+      router.push("/home");
     }
   }, [user, router]);
 

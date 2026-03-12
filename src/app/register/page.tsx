@@ -30,7 +30,7 @@ export default function RegisterPage() {
 
     const success = await register(name, email, password);
     if (success) {
-      router.push("/camera");
+      router.push("/home");
     } else {
       setError("Registration failed. Please try again.");
     }

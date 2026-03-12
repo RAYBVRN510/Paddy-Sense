@@ -24,6 +24,7 @@ export default function CameraPage() {
   const [result, setResult] = useState<ScanResult | null>(null);
   const [isBackCamera, setIsBackCamera] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const uploadInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (isAuthReady && !user) {
@@ -90,6 +91,34 @@ export default function CameraPage() {
     }
   };
 
+  const handleUploadClick = () => {
+    uploadInputRef.current?.click();
+  };
+
+  const handleUploadChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      alert("Please select an image file.");
+      event.target.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageData = reader.result as string;
+      stopCamera();
+      setCapturedImage(imageData);
+      analyzeImage(imageData);
+      event.target.value = "";
+    };
+    reader.onerror = () => {
+      alert("Unable to read the selected image.");
+      event.target.value = "";
+    };
+    reader.readAsDataURL(file);
+  };
+
   const analyzeImage = (imageData: string) => {
     setIsAnalyzing(true);
 
@@ -147,9 +176,21 @@ export default function CameraPage() {
         <div className="relative aspect-[4/5] w-full bg-slate-900 sm:aspect-video">
           {!isCameraActive && !capturedImage && (
             <div className="absolute inset-0 flex items-center justify-center p-4">
-              <button onClick={startCamera} className="btn-primary w-full max-w-xs">
-                Start Camera
-              </button>
+              <div className="flex w-full max-w-xs flex-col gap-3">
+                <button onClick={startCamera} className="btn-primary w-full">
+                  Start Camera
+                </button>
+                <button onClick={handleUploadClick} className="btn-secondary w-full">
+                  Upload Image
+                </button>
+                <input
+                  ref={uploadInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleUploadChange}
+                  className="hidden"
+                />
+              </div>
             </div>
           )}
 

@@ -10,8 +10,9 @@ export default function Navigation() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const homeHref = user ? "/home" : "/";
   const navItems = [
-    { name: "Home", href: "/", public: true },
+    { name: "Home", href: homeHref, public: true },
     { name: "Camera", href: "/camera", public: false },
     { name: "History", href: "/history", public: false },
     { name: "Settings", href: "/settings", public: false },
